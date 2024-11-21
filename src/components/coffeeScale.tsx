@@ -1,7 +1,6 @@
 import React  from 'react';
 import { Box, FormControl,  Input, Typography } from '@mui/material';
 import { Stack, styled } from '@mui/system';
-import { digital7 } from '../utils/font'; // Adjust the path if needed
 
 
 
@@ -32,11 +31,11 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
     <Container spacing={2} alignItems="center">
       <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="20px">
         <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontWeight: 500 }}>How much </span> 
-          <strong style={{ fontSize: '1.5em', fontWeight: 900, color: 'black' }}>
+          <span style={{ fontWeight: 300 }}>How much </span> 
+          <strong style={{ fontSize: '1.5em', fontWeight: 700, color: 'black' }}>
             Coffee
           </strong> 
-          <span style={{ fontWeight: 500 }}> do you use?</span>
+          <span style={{ fontWeight: 300 }}> do you use?</span>
         </Typography>
         <Box 
   sx={{ 
@@ -88,18 +87,22 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
         </Stack>
       </Stack>
       <Stack direction="row" justifyContent="space-evenly" maxWidth="7rem" sx={{ position: "relative", top:"-34.1%"}}  overflow="hidden" spacing={1}>
-      <Typography className={digital7.className} variant="h3" component="span" sx={{ 
-            fontFamily: 'Digital-7', 
-            fontSize: '1.7rem', // Adjust as needed
-            color:'black',
-          }}>
+      <Typography 
+        sx={{ 
+          fontFamily: 'var(--font-digital-7)',
+          fontSize: '1.7rem',
+          color: 'black',
+        }}
+>
             00:00
       </Typography>
-      <Typography className={digital7.className} variant="h3" component="span" sx={{ 
-            fontFamily: 'Digital-7', 
+      <Typography 
+          sx={{ 
+            fontFamily: 'var(--font-digital-7)', // Use the CSS variable here
             fontSize: '1.7rem',
-            color:'black',
-          }}>
+            color: 'black',
+          }}
+>
             {coffeeWeight}G
       </Typography>
      

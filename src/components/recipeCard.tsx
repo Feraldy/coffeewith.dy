@@ -60,11 +60,11 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
     <Container spacing={2} alignItems="center">
       <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="15px">
         <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontWeight: 500 }}>Which </span>
-          <strong style={{ fontSize: '1.5em', fontWeight: 900, color: 'black' }}>
+          <span style={{ fontWeight: 300 }}>Which </span>
+          <strong style={{ fontSize: '1.5em', fontWeight: 700, color: 'black' }}>
             Recipe
           </strong>
-          <span style={{ fontWeight: 500 }}> do you use?</span>
+          <span style={{ fontWeight: 300 }}> do you use?</span>
         </Typography>
         <Box display="flex" justifyContent="center" height="400px"> {/* Fixed height for the dripper display */}
           {displayedCard.map((cardRecipe, index) => (
@@ -87,10 +87,10 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
                         left: 0,
                         width: '100%',
                         color: 'black'}}>
-                        <Typography gutterBottom component="div" style={{ fontSize: '1rem', fontFamily: 'Poppins', fontWeight: 900 }}>
+                        <Typography gutterBottom component="div" style={{ fontSize: '1rem', fontFamily: 'Poppins', fontWeight: 700 }}>
                             {cardRecipe.name}
                         </Typography>
-                        <Typography variant="body2" sx={{ fontSize: '0.7rem',fontWeight: 100, fontFamily: 'Poppins' }}>
+                        <Typography variant="body2" sx={{ fontSize: '0.7rem', fontWeight: 500, fontFamily: 'Poppins' }}>
                             {cardRecipe.description}
                         </Typography>
                     </CardContent>

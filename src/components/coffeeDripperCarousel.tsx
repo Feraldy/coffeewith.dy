@@ -49,16 +49,17 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
     <Container spacing={2} alignItems="center">
       <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="15px">
         <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontWeight: 500 }}>What coffee </span> 
-          <strong style={{ fontSize: '1.5em', fontWeight: 900, color: 'black' }}>
+          <span style={{ fontWeight: 300 }}>What coffee </span> 
+          <strong style={{ fontSize: '1.5em', fontWeight: 700, color: 'black' }}>
             dripper
           </strong> 
-          <span style={{ fontWeight: 500 }}> do you use?</span>
+          <span style={{ fontWeight: 300 }}> do you use?</span>
         </Typography>
         <Box display="flex" justifyContent="center" height="400px"> {/* Fixed height for the dripper display */}
           {displayedDrippers.map((dripper, index) => (
-            <Stack alignItems="center" justifyContent="center" key={dripper.name}>
+            <Stack alignItems="center" justifyContent="center" key={dripper.name} spacing={2}>
               <DripperItem
+                alignItems="center"
                 selected={selectedIndex === (selectedIndex + index - 1 + drippers.length) % drippers.length}
                 visible={true} // Always show the three drippers
                 onClick={() => handleClick((selectedIndex + index - 1 + drippers.length) % drippers.length)} // Update selectedIndex based on position
@@ -74,7 +75,6 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
                   }}
                 />
               </DripperItem>
-              <Typography style={{ textAlign: 'center', color: 'black' }}>{dripper.name}</Typography>
             </Stack>
           ))}
         </Box>
