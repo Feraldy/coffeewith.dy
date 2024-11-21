@@ -62,21 +62,15 @@ const WaterRatio: React.FC<waterRatioProps> =({onWaterRatioChange, onWaterRatioC
   const generateWavePoints = () => {
   const points = [];
   const width = 100; 
-  const maxHeight = 200; // Maximum height of the box in pixels
+  const maxHeight = 200;
   const waterHeight = calculateWaterHeight();
 
-  // Calculate a dynamic amplitude that decreases as water level rises
   const amplitude = 10 * (1 - waterHeight / maxHeight); 
 
   for (let i = 0; i <= width; i++) {
-    // Calculate the wave's y-coordinate
-    let y =
-      amplitude * Math.sin((waveOffset * 2 * Math.PI) + (i / width) * 4 * Math.PI);
+    let y = amplitude * Math.sin((waveOffset * 2 * Math.PI) + (i / width) * 4 * Math.PI);
 
-    // Scale and shift the wave to fit within the water level
     y = (y + amplitude) * (waterHeight / maxHeight) + (100 - waterHeight); 
-
-    // Ensure y is within the bounds [0, 100]
     y = Math.max(0, Math.min(100, y)); 
     points.push(`${i}% ${y}%`);
   }
@@ -124,7 +118,6 @@ const handleFlip = () => {
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
         }}
       >
-        {/* Front side (Water) */}
         <Box
           sx={{
             position: "absolute",
@@ -138,7 +131,6 @@ const handleFlip = () => {
           }}
         />
 
-        {/* Back side (Ratio) */}
         <Box
           sx={{
             position: "absolute",
@@ -161,9 +153,7 @@ const handleFlip = () => {
           </FormControl>
         </Box>
       </Box>
-      {/* Input controls */}
       {isFlipped ? (
-        // Ratio input (replace with your actual ratio input)
         <FormControl variant="standard" sx={{ width: '5rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>
             <Input
               value={ratio}
@@ -176,7 +166,6 @@ const handleFlip = () => {
             /> 
         </FormControl>
       ) : (
-        // Water input
         <Stack direction="row" alignItems="center" spacing={2}>
           <Slider
             value={water}

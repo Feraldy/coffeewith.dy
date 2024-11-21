@@ -1,12 +1,10 @@
-import React  from 'react';
+import React, { useEffect, useRef }  from 'react';
 import { Box, FormControl,  Input, Typography } from '@mui/material';
 import { Stack, styled } from '@mui/system';
 
-
-
 const Container = styled(Stack)({
-    backgroundColor: '#D9D9D9', // Set the background color
-    height: '100vh', // Full viewport height
+    backgroundColor: '#D9D9D9',
+    height: '100vh', 
     justifyContent: 'center',
   });
 
@@ -17,18 +15,46 @@ const Container = styled(Stack)({
   }
 
 const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm, coffeeWeight }) => {
-  //const [coffeeWeight, setWeight] = useState(0); 
+  const scaleRef = useRef<HTMLDivElement>(null);
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (isInViewport(scaleRef.current)) {
+      if (event.key === 'Enter'){
+        onScaleConfirm(coffeeWeight)
+      }
+    }
+  };
+
+  const isInViewport = (element: HTMLElement | null) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
+
+    );
+  };
   
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  },);
+
+
   const handleDecrement = () => {
-    onScaleChange(Math.max(0, coffeeWeight - 1)); // Decrement weight, minimum 0
+    onScaleChange(Math.max(0, coffeeWeight - 1));
   };
 
   const handleIncrement = () => {
-    onScaleChange(coffeeWeight + 1); // Increment weight
+    onScaleChange(coffeeWeight + 1);
   };
 
   return (
-    <Container spacing={2} alignItems="center">
+    <Container spacing={2} alignItems="center" ref={scaleRef}>
       <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="20px">
         <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
           <span style={{ fontWeight: 300 }}>How much </span> 
@@ -42,6 +68,9 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
     display: 'flex', 
     justifyContent: 'center',
     alignItems: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    }
   }}
 >
   <img 
@@ -50,7 +79,7 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
     style={{ 
       maxWidth: '100%', 
       maxHeight: '400px', 
-      borderRadius: '5px' 
+      borderRadius: '5px',
     }} 
     onClick={() => {
       onScaleConfirm(coffeeWeight);
@@ -98,7 +127,7 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
       </Typography>
       <Typography 
           sx={{ 
-            fontFamily: 'var(--font-digital-7)', // Use the CSS variable here
+            fontFamily: 'var(--font-digital-7)',
             fontSize: '1.7rem',
             color: 'black',
           }}

@@ -31,7 +31,6 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
 
   return (
     <Container spacing={2} alignItems="center">
-      {/* Background Images */}
       <Box
         position= "absolute"
         width= "400px"
@@ -112,11 +111,11 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             </Stack>
             <Stack alignItems="center">
               <Typography variant="h4">Water</Typography>
-              <Typography variant="h6">{water? water : coffeeWeight*ratio} ml</Typography>
+              <Typography variant="h6">{water? water : Math.round(coffeeWeight*ratio)} ml</Typography>
             </Stack>
             <Stack alignItems="center">
               <Typography variant="h4">Ratio</Typography>
-              <Typography variant="h6">1:{ratio.toFixed(1)}</Typography>
+              <Typography variant="h6">1:{ratio.toFixed(0)}</Typography>
             </Stack>
           </Stack>
           <Typography variant="h4" fontWeight="900">
@@ -136,13 +135,13 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
                     </Typography>
                   );
                 }
-                return null; // Or you can return the last time without a range
+                return null;
               })}
             </Stack>
             <Stack spacing={2}>
               {pour.map((p, index) => (
                 <Typography variant="h6" key={index}>
-                  {Number(p) % 1 === 0 ? p : Number(p).toFixed(2)} ml
+                  {Number(p) % 1 === 0 ? p : Number(p).toFixed(0)} ml
                 </Typography>
               ))}
             </Stack>
@@ -151,7 +150,7 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
                 const totalPour = pour.slice(0, index + 1).reduce((a, b) => Number(a) + Number(b), 0);
                 return (
                   <Typography variant="h6" key={index}>
-                    {totalPour % 1 === 0 ? totalPour : totalPour.toFixed(2)} ml
+                    {totalPour % 1 === 0 ? totalPour : totalPour.toFixed(0)} ml
                   </Typography>
                 );
               })}

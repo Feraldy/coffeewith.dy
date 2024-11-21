@@ -17,5 +17,6 @@ export interface Dripper {
     image: string;
     dripper: Dripper;
     description: string;
-    recipeVar: RecipeVar; // Add recipeVar to CardRecipe
+    recipeVar: RecipeVar;
+    learnMore?: string; // Add recipeVar to CardRecipe
   }

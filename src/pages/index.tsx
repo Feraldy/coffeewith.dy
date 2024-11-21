@@ -8,6 +8,7 @@ import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 import FullRecipe from "@/components/fullRecipe";
 import WaterRatio from "@/components/waterRatio";
 import { CardRecipe, Dripper } from "@/utils/types";
+import { Typography } from "@mui/material";
 
 function Home() {
   const [selectedDripper, setSelectedDripper] = useState<Dripper | null>(null);
@@ -54,6 +55,7 @@ function Home() {
     setShowCarousel(true); 
     if (recipeCard.id !== 'custom'){
       setShowWaterRatio(false);
+      setShowCarousel(false); 
     }
     if (showCarousel && carouselRef.current) {
       gsap.to(window, { duration: 2, scrollTo: carouselRef.current });
