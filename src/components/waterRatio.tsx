@@ -33,8 +33,7 @@ const WaterRatio: React.FC<waterRatioProps> =({onWaterRatioChange, onWaterRatioC
 
   const handleWaterLevelChange = (event:any) => {
     const newWater = parseInt(event.target.value, 10) || 0; 
-    const newRatio = newWater / coffeeWeight;
-    onWaterRatioChange(newWater, Math.round(newRatio));
+    onWaterRatioChange(newWater, newWater / coffeeWeight);
   };
 
   const calculateWaterHeight = () => {
@@ -84,13 +83,13 @@ const handleFlip = () => {
   return (
     <Container spacing={2} alignItems="center">
       <Stack>
-        <Typography variant="h5" sx={{ fontFamily: "Poppins" }}>
+        <Typography fontSize="1.5rem" sx={{ fontFamily: "Poppins" }}>
           How much <strong>Water</strong>?
         </Typography>
         <Typography
-          variant="h5"
+          fontSize="1.5rem"
           align="right"
-          sx={{ fontFamily: "Poppins", cursor: "pointer" }}
+          sx={{ fontFamily: "Poppins", cursor: "pointer", '&:hover': {textDecoration:"underline"}}}
           onClick={handleFlip}
         >
           or <strong>Ratio</strong>?
@@ -116,6 +115,10 @@ const handleFlip = () => {
           transition: "transform 0.8s",
           transformStyle: "preserve-3d",
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          '&:hover': {
+            transform: 'scale(1.1)',
+            cursor: 'pointer'
+          },
         }}
       >
         <Box
@@ -172,7 +175,7 @@ const handleFlip = () => {
             onChange={handleWaterLevelChange}
             min={0}
             max={400}
-            step={10}
+            step={1}
             sx={{ width: "13rem", color: "black" }}
           />
           <FormControl variant="standard" sx={{ width: '2rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>

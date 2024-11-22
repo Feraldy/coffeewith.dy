@@ -11,18 +11,23 @@ const Container = styled(Stack)({
 });
 
 const DripperItem = styled(Box)<{ selected: boolean; visible: boolean }>(({ selected, visible }) => ({
-  width: selected ? '250px' : '200px', 
-  height: '250px',
-  filter: selected ? 'none' : 'blur(4px)',
-  transition: 'filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease',
-  transform: selected ? 'scale(1.5)' : 'scale(0.5) translateX(${position * 50}px)',
+  maxWidth: '55vw',
+  width: selected ? '18rem' : '8rem',
+  maxHeight: '50vh',
+  filter: selected ? 'none' : 'blur(0.2rem)',
+  transition: 'filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease, box-shadow 0.2s ease',
+  transform: selected ? 'scale(1.5)' : 'scale(0.5)  translateX(${position * 3}rem)',
   opacity: visible ? 1 : 0,
   display: visible ? 'flex' : 'none',
   flexDirection: 'column',
   alignItems: 'center',
-  margin: '0 10px',
+  margin: '5.5rem 1rem',
   position: 'relative',
-  zIndex: selected ? 1 : 0, 
+  zIndex: selected ? 10 : 0,
+  '&:hover': {
+    transform: selected ? 'scale(1.6)' : 'scale(1)',
+    cursor: 'pointer'
+  },
 }));
 
 interface CoffeeDripperCarouselProps {
@@ -36,7 +41,8 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
-    if(index ===  selectedIndex ){onDripperSelect(drippers[index]);}
+    if(index ===  selectedIndex ){
+      onDripperSelect(drippers[index]);}
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -62,7 +68,7 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
       const touchEndX = event.changedTouches[0].clientX;   
       const deltaX = touchEndX - touchStartX;   
 
-      if (Math.abs(deltaX) > 50) {
+      if (Math.abs(deltaX) > 20) {
         if (deltaX > 0) {
           handleClick((selectedIndex - 1 + drippers.length) % drippers.length);
         } else {
@@ -112,17 +118,16 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
 
   return (
     <Container spacing={2} alignItems="center">
-      <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="15px">
-        <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontWeight: 300 }}>What coffee </span> 
-          <strong style={{ fontSize: '1.5em', fontWeight: 700, color: 'black' }}>
+      <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" ref={dripperCarouselRef}>
+        <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }} maxWidth="80vw">
+          <span style={{ fontSize: '2rem', fontWeight: 300 }}>What coffee </span> 
+          <strong style={{ fontSize: '2.5rem', fontWeight: 700, color: 'black' }}>
             dripper
           </strong> 
-          <span style={{ fontWeight: 300 }}> do you use?</span>
+          <span style={{ fontSize: '2rem', fontWeight: 300 }}> do you use?</span>
         </Typography>
-        <Box display="flex" justifyContent="center" height="400px"> 
+        <Stack direction="row"> 
           {displayedDrippers.map((dripper, index) => (
-            <Stack alignItems="center" justifyContent="center" key={dripper.name} spacing={2} ref={dripperCarouselRef}>
               <DripperItem
                 alignItems="center"
                 selected={selectedIndex === (selectedIndex + index - 1 + drippers.length) % drippers.length}
@@ -133,16 +138,14 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
                   src={dripper.image}
                   alt={dripper.name}
                   style={{ 
-                    width: '250px',
-                    height: '250px',
+                    width: '14rem',
+                    height: '14rem',
                     objectFit: 'contain',
-                    borderRadius: '8px' 
                   }}
                 />
               </DripperItem>
-            </Stack>
           ))}
-        </Box>
+        </Stack>
       </Stack>
     </Container>
   );

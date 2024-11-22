@@ -31,57 +31,27 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
 
   return (
     <Container spacing={2} alignItems="center">
-      <Box
-        position= "absolute"
-        width= "400px"
-        height= "auto"
-        component="img"
-        src="scale.png"
-        style={{ top: "30%", left: "22%", width: "200px", rotate: "-25deg" }}
-        alt="Scale"
-      />
-      <Box
-        position= "absolute"
-        width= "400px"
-        height= "auto"
-        component="img"
-        src={selectedRecipe?.image}
-        style={{
-          top: "10%",
-          right: "25%",
-          width: "230px",
-          borderRadius: "20px",
-          rotate: "25deg",
-        }}
-        alt="Dripper"
-      />
-      <Box
-        position= "absolute"
-        width= "400px"
-        height= "auto"
-        component="img"
-        src={selectedDripper?.image}
-        style={{ bottom: "5%", left: "60%", rotate: "45deg" }}
-        alt="V60 Filter"
-      />
+      
 
-      <Typography variant="h5" sx={{ fontFamily: "Poppins" }}>
+      <Typography variant="h5" sx={{ fontFamily: "Poppins", zIndex:1 }}>
         Here is your <strong>recipe</strong>!
       </Typography>
+      <Stack position="relative">
       <Box
         className="glass"
         display="flex"
-        alignContent="center"
         justifyContent="center"
-        height="40rem"
-        width="50rem"
-        padding="5rem"
+        maxHeight="80vh"
+        height="100%"
+        maxWidth="90vw"
+        width="55rem"
+        padding="5vw"
         sx={{ position: "relative", zIndex: 1 }}
       >
         <Stack
-          width="35rem"
-          sx={{ justifyContent: "space-evenly", color: "black" }}
-          spacing={4}
+          width="55rem"
+          sx={{ justifyContent: "center", color: "black" }}
+          spacing={2}
         >
           <Stack
             direction="row"
@@ -89,14 +59,14 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             spacing={2}
           >
             <Stack>
-              <Typography variant="h4" fontWeight="900">
+              <Typography fontFamily="Poppins" fontSize="1.5rem" fontWeight="700">
                 {selectedRecipe?.recipeName}
               </Typography>
-              <Typography variant="h6">
+              <Typography fontFamily="Poppins" fontSize="1.2rem" fontWeight="300">
                 by {selectedRecipe?.name}
               </Typography>
             </Stack>
-            <Typography variant="subtitle1">
+            <Typography fontFamily="Poppins" fontSize="1rem">
               {selectedDripper?.name} Dripper
             </Typography>
           </Stack>
@@ -106,19 +76,19 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             spacing={2}
           >
             <Stack alignItems="center">
-              <Typography variant="h4">Coffee</Typography>
-              <Typography variant="h6">{coffeeWeight}gr</Typography>
+              <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">Coffee</Typography>
+              <Typography fontSize="1rem" fontFamily="Poppins">{coffeeWeight}gr</Typography>
             </Stack>
             <Stack alignItems="center">
-              <Typography variant="h4">Water</Typography>
-              <Typography variant="h6">{water? water : Math.round(coffeeWeight*ratio)} ml</Typography>
+              <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">Water</Typography>
+              <Typography fontSize="1rem" fontFamily="Poppins">{water? water : Math.round(coffeeWeight*ratio)} ml</Typography>
             </Stack>
             <Stack alignItems="center">
-              <Typography variant="h4">Ratio</Typography>
-              <Typography variant="h6">1:{ratio.toFixed(0)}</Typography>
+              <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">Ratio</Typography>
+              <Typography fontSize="1rem" fontFamily="Poppins">1:{ratio.toFixed(0)}</Typography>
             </Stack>
           </Stack>
-          <Typography variant="h4" fontWeight="900">
+          <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">
             Pouring Recipe
           </Typography>
           <Stack
@@ -126,11 +96,11 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             sx={{ justifyContent: "space-between", alignItems: "center" }}
             spacing={2}
           >
-            <Stack spacing={2}>
+            <Stack spacing={1}>
               {selectedRecipe.recipeVar.time.map((time, index) => {
                 if (index < selectedRecipe.recipeVar.time.length - 1) {
                   return (
-                    <Typography variant="h6" key={index}>
+                    <Typography variant="h6" fontSize="1rem" key={index} fontFamily="Poppins" fontWeight="400">
                       {time} - {selectedRecipe.recipeVar.time[index + 1]}
                     </Typography>
                   );
@@ -138,18 +108,18 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
                 return null;
               })}
             </Stack>
-            <Stack spacing={2}>
+            <Stack spacing={1}>
               {pour.map((p, index) => (
-                <Typography variant="h6" key={index}>
+                <Typography variant="h6" fontSize="1rem" key={index} fontFamily="Poppins" fontWeight="400">
                   {Number(p) % 1 === 0 ? p : Number(p).toFixed(0)} ml
                 </Typography>
               ))}
             </Stack>
-            <Stack spacing={2}>
+            <Stack spacing={1}>
               {pour.map((p, index) => {
                 const totalPour = pour.slice(0, index + 1).reduce((a, b) => Number(a) + Number(b), 0);
                 return (
-                  <Typography variant="h6" key={index}>
+                  <Typography variant="h6" fontSize="1rem" key={index} fontFamily="Poppins" fontWeight="400">
                     {totalPour % 1 === 0 ? totalPour : totalPour.toFixed(0)} ml
                   </Typography>
                 );
@@ -158,6 +128,36 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
           </Stack>
         </Stack>
       </Box>
+      <Box
+        position= "absolute"
+        maxWidth= "14rem"
+        component="img"
+        src="scale.png"
+        style={{ top: "10rem", left: "-12rem", rotate: "-25deg" }}
+        alt="Scale"
+      />
+      <Box
+        position= "absolute"
+        maxWidth= "15rem"
+        component="img"
+        src={selectedRecipe?.image}
+        style={{
+          top: "-3rem",
+          right: "-10rem",
+          borderRadius: "20px",
+          rotate: "25deg",
+        }}
+        alt="Dripper"
+      />
+      <Box
+        position= "absolute"
+        maxWidth= "20rem"
+        component="img"
+        src={selectedDripper?.image}
+        style={{ top: "25rem", right: "-10rem", rotate: "45deg" }}
+        alt="V60 Filter"
+      />
+      </Stack>
     </Container>
   );
 };

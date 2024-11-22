@@ -55,37 +55,57 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
 
   return (
     <Container spacing={2} alignItems="center" ref={scaleRef}>
-      <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="20px">
-        <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontWeight: 300 }}>How much </span> 
-          <strong style={{ fontSize: '1.5em', fontWeight: 700, color: 'black' }}>
+      <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="1rem">
+        <Typography variant="h4" maxWidth="80vw" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
+          <span style={{ fontSize: '2rem',fontWeight: 300 }}>How much </span> 
+          <strong style={{ fontSize: '2.3rem', fontWeight: 700, color: 'black' }}>
             Coffee
           </strong> 
-          <span style={{ fontWeight: 300 }}> do you use?</span>
+          <span style={{ fontSize: '2rem', fontWeight: 300 }}> do you use?</span>
         </Typography>
-        <Box 
-  sx={{ 
-    display: 'flex', 
-    justifyContent: 'center',
-    alignItems: 'center',
-    '&:hover': {
-      cursor: 'pointer',
-    }
-  }}
->
-  <img 
-    src="scale.png" 
-    alt="Coffee scale" 
-    style={{ 
-      maxWidth: '100%', 
-      maxHeight: '400px', 
-      borderRadius: '5px',
-    }} 
-    onClick={() => {
-      onScaleConfirm(coffeeWeight);
-    }}
-  />
-</Box >
+        <Stack position="relative" sx={{'&:hover': {
+                cursor: 'pointer',
+                transform: 'scale(1.05)'
+              }}}>
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              justifyContent: 'center',
+              alignItems: 'center',
+              
+            }}
+          >
+            <img 
+              src="scale.png" 
+              alt="Coffee scale" 
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: '25rem', 
+              }} 
+              onClick={() => {
+                onScaleConfirm(coffeeWeight);
+              }}
+            />
+          </Box >
+          <Stack direction="row" justifyContent="space-between" width="6.5rem" maxWidth="7rem" sx={{ position: "absolute", top: "20.3rem", left: "4.75rem"}}  overflow="hidden" spacing={1}>
+            <Typography 
+              sx={{ 
+                fontFamily: 'var(--font-digital-7)',
+                fontSize: '1.7rem',
+                color: 'black',
+              }}>
+                  00:00
+            </Typography>
+            <Typography 
+                sx={{ 
+                  fontFamily: 'var(--font-digital-7)',
+                  fontSize: '1.7rem',
+                  color: 'black',
+                }}>
+                  {coffeeWeight}G
+            </Typography>
+          </Stack>
+      </Stack>
         <Stack direction="row" alignItems="center" justifyContent='center' spacing={2}> 
           <Typography 
             style={{ textAlign: 'center', color: 'black', cursor: 'pointer' }} 
@@ -114,27 +134,6 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
             +
           </Typography>
         </Stack>
-      </Stack>
-      <Stack direction="row" justifyContent="space-evenly" maxWidth="7rem" sx={{ position: "relative", top:"-34.1%"}}  overflow="hidden" spacing={1}>
-      <Typography 
-        sx={{ 
-          fontFamily: 'var(--font-digital-7)',
-          fontSize: '1.7rem',
-          color: 'black',
-        }}
->
-            00:00
-      </Typography>
-      <Typography 
-          sx={{ 
-            fontFamily: 'var(--font-digital-7)',
-            fontSize: '1.7rem',
-            color: 'black',
-          }}
->
-            {coffeeWeight}G
-      </Typography>
-     
       </Stack>
     </Container>
   );

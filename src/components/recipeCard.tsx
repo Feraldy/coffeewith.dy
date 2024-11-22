@@ -10,22 +10,27 @@ const Container = styled(Stack)({
   justifyContent: 'center',
 });
 
-const CardItem = styled(Card)<{ selected: boolean; visible: boolean; hovered: boolean }>(
-  ({ selected, visible, hovered }) => ({
-    width: selected ? '250px' : '200px',
-    position: 'relative',
-    filter: selected ? 'none' : 'blur(4px)',
+const CardItem = styled(Card)<{ selected: boolean; visible: boolean }>(
+  ({ selected, visible }) => ({
+    maxWidth: '55vw',
+    width: selected ? '20rem' : '18rem',
+    maxHeight: '55vh',
+    filter: selected ? 'none' : 'blur(0.1rem)',
     transition: 'filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease, box-shadow 0.2s ease',
-    transform: selected ? 'scale(1.5)' : 'scale(0.5) translateX(${position * 50}px)',
+    transform: selected ? 'scale(1.5)' : 'scale(0.5)  translateX(${position * 3}rem)',
     opacity: visible ? 1 : 0,
     display: visible ? 'flex' : 'none',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '0 10px',
+    margin: '5.5rem 0rem',
     zIndex: selected ? 10 : 0,
-    boxShadow: hovered && selected ? '0px 0px 20px rgba(0, 0, 0, 0.3)' : 'none',
+    background: "rgba(255, 255, 255, 0.1)",
+    borderRadius: "1rem",
+    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+    backdropFilter: "blur(0.15rem)",
+    border: "1px solid rgba(255, 255, 255, 0.67)",
     '&:hover': {
-      transform: selected ? 'scale(1.6)' : 'scale(0.6) translateX(${position * 50}px)',
+      transform: selected ? 'scale(1.6)' : 'scale(1)',
     },
   })
 );
@@ -127,27 +132,26 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
 
   return (
     <Container spacing={2} alignItems="center" height="100vh">
-      <Typography style={{ textAlign: 'left', color: 'black', fontFamily: 'Poppins' }}>CoffeeWith.Dy</Typography>
-      <Stack spacing={2} alignItems="center" height="60%" justifyContent="space-between" ref={recipeCarouselRef}>
-        <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontWeight: 300 }}>Which </span>
-          <strong style={{ fontSize: '1.5em', fontWeight: 700, color: 'black' }}>
+      <Stack spacing={2} alignItems="center" justifyContent="center" ref={recipeCarouselRef}>
+        <Typography style={{ textAlign: 'left', color: 'black', fontFamily: 'Poppins' }}>CoffeeWith.Dy</Typography>
+        <Typography maxWidth="80vw" variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
+          <span style={{ fontSize: '2rem', fontWeight: 300 }}>Which </span>
+          <strong style={{ fontSize: '2.5rem', fontWeight: 700, color: 'black' }}>
             Recipe
           </strong>
-          <span style={{ fontWeight: 300 }}> do you use?</span>
+          <span style={{ fontSize: '2rem', fontWeight: 300 }}> do you use?</span>
         </Typography>
-        <Box display="flex" justifyContent="center" height="400px">
+        <Stack direction="row">
           {displayedCard.map((cardRecipe, index) => (
-            <Stack alignItems="center" justifyContent="space-between" key={cardRecipe.id} height="100%">
-              <CardItem className='glass'
+              <CardItem key={cardRecipe.id}
                 selected={selectedIndex === (selectedIndex + index - 1 + cardRecipes.length) % cardRecipes.length}
                 visible={true}
                 onClick={() => handleClick((selectedIndex + index - 1 + cardRecipes.length) % cardRecipes.length)}
-                hovered={false}>
+                >
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    height="140"
+                    height="150rem"
                     src={cardRecipe.image}
                     sx={{ objectFit: 'cover' }} />
                   <CardContent sx={{
@@ -157,21 +161,20 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
                     width: '100%',
                     color: 'black'
                   }}>
-                    <Typography gutterBottom component="div" style={{ fontSize: '1rem', fontFamily: 'Poppins', fontWeight: 700 }}>
+                    <Typography gutterBottom component="div" style={{ fontSize: '0.8rem', fontFamily: 'Poppins', fontWeight: 700 }}>
                       {cardRecipe.recipeName}
                     </Typography>
-                    <Typography variant="overline" component="div" style={{ fontSize: '0.7rem', fontFamily: 'Poppins' }}>
+                    <Typography variant="overline" component="div" style={{ fontSize: '0.5rem', fontFamily: 'Poppins' }}>
                       by {cardRecipe.name}
                     </Typography>
-                    <Typography variant="body2" sx={{ fontSize: '0.7rem', fontWeight: 500, fontFamily: 'Poppins' }}>
+                    <Typography variant="body2" sx={{ fontSize: '0.6rem', fontWeight: 500, fontFamily: 'Poppins', opacity:1}}>
                       {cardRecipe.description}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
               </CardItem>
-            </Stack>
           ))}
-        </Box>
+        </Stack>
       </Stack>
     </Container>
   );
