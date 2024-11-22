@@ -87,7 +87,7 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
               }}
             />
           </Box >
-          <Stack direction="row" justifyContent="space-between" width="6.5rem" maxWidth="7rem" sx={{ position: "absolute", top: "20.3rem", left: "4.75rem"}}  overflow="hidden" spacing={1}>
+          <Stack direction="row" justifyContent="space-between" width="6.5rem" maxWidth="7rem" sx={{ position: "absolute", top: "20.2rem", left: "4.75rem"}}  overflow="hidden" spacing={1}>
             <Typography 
               sx={{ 
                 fontFamily: 'var(--font-digital-7)',
