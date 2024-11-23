@@ -37,12 +37,12 @@ const CardItem = styled(Card)<{ selected: boolean; visible: boolean }>(
 
 interface CardRecipeCarouselProps {
   onRecipeSelect: (cardName: CardRecipe) => void;
-  onDripperSelect: (dripperName: Dripper) => void;
+  onDripperConfirm: (dripperName: Dripper) => void;
   onWaterRatioChange: (water:number, ratio:number) => void;
   onRecipeConfirm: (cardName: CardRecipe) => void;
 }
 
-const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect, onDripperSelect, onWaterRatioChange, onRecipeConfirm }) => {
+const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect, onDripperConfirm, onWaterRatioChange, onRecipeConfirm }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const recipeCarouselRef = useRef<HTMLDivElement>(null);
 
@@ -53,7 +53,7 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
       onRecipeConfirm(cardRecipes[index]);
       if (cardRecipes[index].id !== 'custom')
       {
-        onDripperSelect(cardRecipes[index].dripper)
+        onDripperConfirm(cardRecipes[index].dripper)
         onWaterRatioChange(cardRecipes[index].recipeVar.water,cardRecipes[index].recipeVar.ratio)
       }
     }

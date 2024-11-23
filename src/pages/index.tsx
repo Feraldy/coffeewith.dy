@@ -60,10 +60,16 @@ function Home() {
     if (showCarousel && carouselRef.current) {
       gsap.to(window, { duration: 2, scrollTo: carouselRef.current });
     }
-
   }
 
-  const handleDripperSelect = (dripperName: Dripper) => {
+  const handleDripperChange = (dripperName: Dripper) => {
+    setSelectedDripper(dripperName);
+    setShowScale(false); 
+    setShowWaterRatio(false);
+    setShowFullRecipe(false);
+  };
+
+  const handleDripperConfirm = (dripperName: Dripper) => {
     setSelectedDripper(dripperName);
     setShowScale(true); 
     if (showScale && scaleRef.current) {
@@ -73,6 +79,8 @@ function Home() {
 
   const handleScaleChange = (weight: number) => {
     setCoffeeWeight(weight);
+    setShowWaterRatio(false);
+    setShowFullRecipe(false);
   };
 
   const handleScaleConfirm = (weight: number) => {
@@ -97,6 +105,7 @@ function Home() {
   const handleWaterRatioChange = (water: number, ratio: number) => {
     setWaterLevel(water);
     setRatio(ratio);
+    setShowFullRecipe(false);
   };
 
   const handleWaterRatioConfirm = (water: number, ratio: number) => {
@@ -119,7 +128,7 @@ function Home() {
       <div>
         <RecipeCard
           onRecipeSelect={handleRecipeSelect}
-          onDripperSelect={handleDripperSelect}
+          onDripperConfirm={handleDripperConfirm}
           onWaterRatioChange={handleWaterRatioChange}
           onRecipeConfirm={handleRecipeConfirm}
         />
@@ -127,7 +136,7 @@ function Home() {
       <Container></Container>
       {showCarousel && ( // Conditionally render based on state
         <div ref={carouselRef}>
-          <CoffeeDripperCarousel onDripperSelect={handleDripperSelect} />
+          <CoffeeDripperCarousel onDripperConfirm={handleDripperConfirm} onDripperChange={handleDripperChange} />
           <Container></Container>
         </div>
       )}

@@ -31,14 +31,14 @@ var CardItem = system_1.styled(material_1.Card)(function (_a) {
     });
 });
 var CardRecipeCarousel = function (_a) {
-    var onRecipeSelect = _a.onRecipeSelect, onDripperSelect = _a.onDripperSelect, onWaterRatioChange = _a.onWaterRatioChange;
+    var onRecipeSelect = _a.onRecipeSelect, onDripperConfirm = _a.onDripperConfirm, onWaterRatioChange = _a.onWaterRatioChange;
     var _b = react_1.useState(0), selectedIndex = _b[0], setSelectedIndex = _b[1]; // Start with V60 in the middle
     var handleClick = function (index) {
         setSelectedIndex(index);
         if (index === selectedIndex) {
             onRecipeSelect(cardRecipes[index]);
             if (cardRecipes[index].name !== 'My Recipe') {
-                onDripperSelect(cardRecipes[index].dripper);
+                onDripperConfirm(cardRecipes[index].dripper);
                 onWaterRatioChange(1, 1);
             }
             else {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Stack,
@@ -28,6 +28,8 @@ interface waterRatioProps {
   }
 
 const WaterRatio: React.FC<waterRatioProps> =({onWaterRatioChange, onWaterRatioConfirm, coffeeWeight, water, ratio}) => {
+  const waterRef = useRef<HTMLDivElement>(null);
+  const ratioRef = useRef<HTMLDivElement>(null);
   const [waveOffset, setWaveOffset] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -79,6 +81,48 @@ const WaterRatio: React.FC<waterRatioProps> =({onWaterRatioChange, onWaterRatioC
 const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (isInViewport(waterRef.current)) {
+      if (event.key === 'ArrowRight') {
+        onWaterRatioChange(water+1, (water+1)/coffeeWeight );
+      } else if (event.key === 'ArrowLeft') {
+        onWaterRatioChange(water-1, (water-1)/coffeeWeight );
+      } else if (event.key === 'Enter'){
+        console.log(water)
+        onWaterRatioConfirm(water, water / coffeeWeight);
+      }
+    }
+    else if (isInViewport(ratioRef.current)){
+      if (event.key === 'ArrowRight') {
+        onWaterRatioChange((ratio+1)*coffeeWeight, ratio+1 );
+      } else if (event.key === 'ArrowLeft') {
+        onWaterRatioChange((ratio-1)*coffeeWeight, ratio-1 );
+      } else if (event.key === 'Enter'){
+        console.log(water)
+        onWaterRatioConfirm(ratio*coffeeWeight, ratio);
+      }
+    }
+  };
+
+  const isInViewport = (element: HTMLElement | null) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
+
+    );
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  },);
 
   return (
     <Container spacing={2} alignItems="center">
@@ -172,7 +216,7 @@ const handleFlip = () => {
         </Box>
       </Box>
       {isFlipped ? (
-        <FormControl variant="standard" sx={{ width: '4rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>
+        <FormControl variant="standard" sx={{ width: '4rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }} ref={ratioRef}>
             <Input
               value={ratio}
               onChange={calculateTotalWater}
@@ -184,7 +228,7 @@ const handleFlip = () => {
             />
         </FormControl>
       ) : (
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Stack direction="row" alignItems="center" spacing={2} ref={waterRef}>
           <Slider
             value={water}
             onChange={handleWaterLevelChange}

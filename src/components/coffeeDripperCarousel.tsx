@@ -31,18 +31,21 @@ const DripperItem = styled(Box)<{ selected: boolean; visible: boolean }>(({ sele
 }));
 
 interface CoffeeDripperCarouselProps {
-  onDripperSelect: (dripperName: Dripper) => void; 
+  onDripperConfirm: (dripperName: Dripper) => void; 
+  onDripperChange: (dripperName: Dripper) => void; 
+
 }
 
-const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripperSelect }) => {
+const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripperConfirm, onDripperChange }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const dripperCarouselRef = useRef<HTMLDivElement>(null);
 
 
   const handleClick = (index: number) => {
     setSelectedIndex(index);
+    onDripperChange(drippers[index])
     if(index ===  selectedIndex ){
-      onDripperSelect(drippers[index]);}
+      onDripperConfirm(drippers[index]);}
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -118,7 +121,7 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
 
   return (
     <Container spacing={2} alignItems="center">
-      <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" ref={dripperCarouselRef}>
+      <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" >
         <Typography variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }} maxWidth="80vw">
           <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)", fontWeight: 300 }}>What coffee </span> 
           <strong style={{ fontSize: "clamp(1.5rem, 3.5vmin, 3.5rem)", fontWeight: 700, color: 'black' }}>
@@ -126,7 +129,7 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
           </strong> 
           <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)", fontWeight: 300 }}> do you use?</span>
         </Typography>
-        <Stack direction="row"> 
+        <Stack direction="row" ref={dripperCarouselRef}> 
           {displayedDrippers.map((dripper, index) => (
               <DripperItem
                 alignItems="center"

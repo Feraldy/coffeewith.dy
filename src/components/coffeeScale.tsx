@@ -17,9 +17,14 @@ import { Stack, styled } from '@mui/system';
 const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm, coffeeWeight }) => {
   const scaleRef = useRef<HTMLDivElement>(null);
 
+
   const handleKeyDown = (event: KeyboardEvent) => {
     if (isInViewport(scaleRef.current)) {
-      if (event.key === 'Enter'){
+      if (event.key === 'ArrowRight') {
+        handleIncrement();
+      } else if (event.key === 'ArrowLeft') {
+        handleDecrement();
+      } else if (event.key === 'Enter'){
         onScaleConfirm(coffeeWeight)
       }
     }
@@ -54,7 +59,7 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
   };
 
   return (
-    <Container spacing={2} alignItems="center" ref={scaleRef}>
+    <Container spacing={2} alignItems="center">
       <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="1rem">
         <Typography variant="h4" maxWidth="80vw" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
           <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)",fontWeight: 300 }}>How much </span> 
@@ -68,6 +73,7 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
                 transform: 'scale(1.05)'
               }}}>
           <Box 
+            ref={scaleRef}
             sx={{ 
               display: 'flex', 
               justifyContent: 'center',
@@ -122,7 +128,7 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
             id="standard-adornment-weight"
             aria-describedby="standard-weight-helper-text"
             value={coffeeWeight}
-            onChange={(e) => onScaleChange(parseInt(e.target.value, 10) || 0)} 
+            onChange={(e) => onScaleChange(parseInt(e.target.value, 10) || 0)}
             inputProps={{
               'aria-label': 'weight',
               style: { textAlign: 'center' },
