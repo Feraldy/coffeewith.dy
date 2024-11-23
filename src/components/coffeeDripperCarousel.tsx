@@ -15,8 +15,8 @@ const DripperItem = styled(Box)<{ selected: boolean; visible: boolean }>(({ sele
   width: selected ? '18rem' : '8rem',
   maxHeight: '50vh',
   filter: selected ? 'none' : 'blur(0.2rem)',
-  transition: 'filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease, box-shadow 0.2s ease',
-  transform: selected ? 'scale(1.5)' : 'scale(0.5)  translateX(${position * 3}rem)',
+  transition: 'filter 0.4s ease-in-out, transform 0.4s ease-in-out, opacity 0.4s ease-in-out, box-shadow 0.2s ease-in-out',
+  transform: selected ? 'scale(1.5) translateY(-0.8rem)' : 'scale(0.5)  translateX(${position * 5}rem)',
   opacity: visible ? 1 : 0,
   display: visible ? 'flex' : 'none',
   flexDirection: 'column',
@@ -71,7 +71,7 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
       const touchEndX = event.changedTouches[0].clientX;   
       const deltaX = touchEndX - touchStartX;   
 
-      if (Math.abs(deltaX) > 20) {
+      if (Math.abs(deltaX) > 30) {
         if (deltaX > 0) {
           handleClick((selectedIndex - 1 + drippers.length) % drippers.length);
         } else {
@@ -145,6 +145,7 @@ const CoffeeDripperCarousel: React.FC<CoffeeDripperCarouselProps> = ({ onDripper
                     height: '14rem',
                     objectFit: 'contain',
                   }}
+                  loading="lazy"
                 />
               </DripperItem>
           ))}

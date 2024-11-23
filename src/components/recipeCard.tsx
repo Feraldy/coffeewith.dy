@@ -82,7 +82,7 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
       const touchEndX = event.changedTouches[0].clientX;   
       const deltaX = touchEndX - touchStartX;   
 
-      if (Math.abs(deltaX) > 50) {
+      if (Math.abs(deltaX) > 30) {
         if (deltaX > 0) {
           handleClick((selectedIndex - 1 + cardRecipes.length) % cardRecipes.length);
         } else {
