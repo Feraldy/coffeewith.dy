@@ -8,7 +8,6 @@ const Container = styled(Stack)({
   height: "100vh",
   justifyContent: "center",
   position: "relative",
-  overflow: "hidden",
   color: "black", 
 });
 
@@ -59,14 +58,14 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             spacing={2}
           >
             <Stack>
-              <Typography fontFamily="Poppins" fontSize="1.5rem" fontWeight="700">
+              <Typography fontFamily="Poppins" fontSize="clamp(3vh, 2vmin, 1.7rem)" fontWeight="700">
                 {selectedRecipe?.recipeName}
               </Typography>
-              <Typography fontFamily="Poppins" fontSize="1.2rem" fontWeight="300">
+              <Typography fontFamily="Poppins" fontSize="clamp(2vh, 2vmin, 1.7rem)" fontWeight="300">
                 by {selectedRecipe?.name}
               </Typography>
             </Stack>
-            <Typography fontFamily="Poppins" fontSize="1rem">
+            <Typography fontFamily="Poppins" fontSize="clamp(1.5vh, 2vmin, 1rem)">
               {selectedDripper?.name} Dripper
             </Typography>
           </Stack>
@@ -76,19 +75,19 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             spacing={2}
           >
             <Stack alignItems="center">
-              <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">Coffee</Typography>
-              <Typography fontSize="1rem" fontFamily="Poppins">{coffeeWeight}gr</Typography>
+              <Typography fontSize="clamp(3vh, 2vmin, 1.7rem)" fontWeight="700" fontFamily="Poppins">Coffee</Typography>
+              <Typography fontSize="clamp(2vh, 2vmin, 1.7rem)" fontFamily="Poppins">{coffeeWeight}gr</Typography>
             </Stack>
             <Stack alignItems="center">
-              <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">Water</Typography>
-              <Typography fontSize="1rem" fontFamily="Poppins">{water? water : Math.round(coffeeWeight*ratio)} ml</Typography>
+              <Typography fontSize="clamp(3vh, 2vmin, 1.7rem)" fontWeight="700" fontFamily="Poppins">Water</Typography>
+              <Typography fontSize="clamp(2vh, 2vmin, 1.7rem)" fontFamily="Poppins">{water? water : Math.round(coffeeWeight*ratio)} ml</Typography>
             </Stack>
             <Stack alignItems="center">
-              <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">Ratio</Typography>
-              <Typography fontSize="1rem" fontFamily="Poppins">1:{ratio.toFixed(0)}</Typography>
+              <Typography fontSize="clamp(3vh, 2vmin, 1.7rem)" fontWeight="700" fontFamily="Poppins">Ratio</Typography>
+              <Typography fontSize="clamp(2vh, 2vmin, 1.7rem)" fontFamily="Poppins">1:{ratio.toFixed(0)}</Typography>
             </Stack>
           </Stack>
-          <Typography fontSize="1.2rem" fontWeight="700" fontFamily="Poppins">
+          <Typography fontSize="clamp(3vh, 2vmin, 1.7rem)" fontWeight="700" fontFamily="Poppins">
             Pouring Recipe
           </Typography>
           <Stack
@@ -100,7 +99,7 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
               {selectedRecipe.recipeVar.time.map((time, index) => {
                 if (index < selectedRecipe.recipeVar.time.length - 1) {
                   return (
-                    <Typography variant="h6" fontSize="1rem" key={index} fontFamily="Poppins" fontWeight="400">
+                    <Typography variant="h6" fontSize="clamp(2vh, 2vmin, 1.7rem)" key={index} fontFamily="Poppins" fontWeight="400">
                       {time} - {selectedRecipe.recipeVar.time[index + 1]}
                     </Typography>
                   );
@@ -110,7 +109,7 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
             </Stack>
             <Stack spacing={1}>
               {pour.map((p, index) => (
-                <Typography variant="h6" fontSize="1rem" key={index} fontFamily="Poppins" fontWeight="400">
+                <Typography variant="h6" fontSize="clamp(2vh, 2vmin, 1.7rem)" key={index} fontFamily="Poppins" fontWeight="400">
                   {Number(p) % 1 === 0 ? p : Number(p).toFixed(0)} ml
                 </Typography>
               ))}
@@ -119,7 +118,7 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
               {pour.map((p, index) => {
                 const totalPour = pour.slice(0, index + 1).reduce((a, b) => Number(a) + Number(b), 0);
                 return (
-                  <Typography variant="h6" fontSize="1rem" key={index} fontFamily="Poppins" fontWeight="400">
+                  <Typography variant="h6" fontSize="clamp(2vh, 2vmin, 1.7rem)" key={index} fontFamily="Poppins" fontWeight="400">
                     {totalPour % 1 === 0 ? totalPour : totalPour.toFixed(0)} ml
                   </Typography>
                 );

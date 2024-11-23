@@ -82,19 +82,35 @@ const handleFlip = () => {
 
   return (
     <Container spacing={2} alignItems="center">
-      <Stack>
-        <Typography fontSize="1.5rem" sx={{ fontFamily: "Poppins" }}>
+        {isFlipped ? (
+          <Stack>
+          <Typography onClick={handleFlip} fontSize="clamp(1rem, 3vmin, 2rem)" sx={{ fontFamily: "Poppins", cursor: "pointer", '&:hover': {textDecoration:"underline"} }}>
           How much <strong>Water</strong>?
-        </Typography>
-        <Typography
-          fontSize="1.5rem"
+          </Typography>
+          <Typography
+          fontSize="clamp(1rem, 3vmin, 2rem)"
           align="right"
-          sx={{ fontFamily: "Poppins", cursor: "pointer", '&:hover': {textDecoration:"underline"}}}
-          onClick={handleFlip}
-        >
+          sx={{ fontFamily: "Poppins", }}>
           or <strong>Ratio</strong>?
         </Typography>
       </Stack>
+          
+      ):(
+        <Stack>
+            <Typography fontSize="clamp(1rem, 3vmin, 2rem)" sx={{ fontFamily: "Poppins" }}>
+            How much <strong>Water</strong>?
+            </Typography>
+            <Typography
+            fontSize="clamp(1rem, 3vmin, 2rem)"
+            align="right"
+            sx={{ fontFamily: "Poppins", cursor: "pointer", '&:hover': {textDecoration:"underline"}}}
+            onClick={handleFlip}
+          >
+            or <strong>Ratio</strong>?
+          </Typography>
+        </Stack>
+      )}
+        
       <Box
         onClick={() => {
           onWaterRatioConfirm(water, ratio); 
@@ -116,7 +132,6 @@ const handleFlip = () => {
           transformStyle: "preserve-3d",
           transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
           '&:hover': {
-            transform: 'scale(1.1)',
             cursor: 'pointer'
           },
         }}
@@ -157,16 +172,16 @@ const handleFlip = () => {
         </Box>
       </Box>
       {isFlipped ? (
-        <FormControl variant="standard" sx={{ width: '5rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>
+        <FormControl variant="standard" sx={{ width: '4rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>
             <Input
               value={ratio}
               onChange={calculateTotalWater}
-              startAdornment={<InputAdornment position="start">1 : </InputAdornment>} 
+              startAdornment={<InputAdornment position="start">1 : </InputAdornment>}
               inputProps={{
                 'aria-label': 'weight',
                 style: { textAlign: 'center' },
               }}
-            /> 
+            />
         </FormControl>
       ) : (
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -178,9 +193,10 @@ const handleFlip = () => {
             step={1}
             sx={{ width: "13rem", color: "black" }}
           />
-          <FormControl variant="standard" sx={{ width: '2rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>
+          <FormControl variant="standard" sx={{ width: '3.5rem', '& .MuiInput-underline:before': { borderBottom: 'none' } }}>
             <Input
               value={water}
+              endAdornment={<InputAdornment position="end">ml</InputAdornment>}
               onChange={handleWaterLevelChange}
               inputProps={{
                 'aria-label': 'weight',

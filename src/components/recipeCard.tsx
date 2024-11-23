@@ -17,20 +17,20 @@ const CardItem = styled(Card)<{ selected: boolean; visible: boolean }>(
     maxHeight: '55vh',
     filter: selected ? 'none' : 'blur(0.1rem)',
     transition: 'filter 0.4s ease, transform 0.4s ease, opacity 0.4s ease, box-shadow 0.2s ease',
-    transform: selected ? 'scale(1.5)' : 'scale(0.5)  translateX(${position * 3}rem)',
+    transform: selected ? 'scale(1.3)' : 'scale(0.5)  translateX(${position * 3}rem)',
     opacity: visible ? 1 : 0,
     display: visible ? 'flex' : 'none',
     flexDirection: 'column',
     alignItems: 'center',
     margin: '5.5rem 0rem',
-    zIndex: selected ? 10 : 0,
+    zIndex: selected ? 1 : 0,
     background: "rgba(255, 255, 255, 0.1)",
     borderRadius: "1rem",
     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
     backdropFilter: "blur(0.15rem)",
     border: "1px solid rgba(255, 255, 255, 0.67)",
     '&:hover': {
-      transform: selected ? 'scale(1.6)' : 'scale(1)',
+      transform: selected ? 'scale(1.4)' : 'scale(1)',
     },
   })
 );
@@ -132,14 +132,14 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
 
   return (
     <Container spacing={2} alignItems="center" height="100vh">
-      <Stack spacing={2} alignItems="center" justifyContent="center" ref={recipeCarouselRef}>
-        <Typography style={{ textAlign: 'left', color: 'black', fontFamily: 'Poppins' }}>CoffeeWith.Dy</Typography>
+      <Stack spacing={1} alignItems="center" justifyContent="center" ref={recipeCarouselRef}>
+        <Typography style={{ fontSize: "clamp(1rem, 1vmin, 2rem)", color: 'black', fontFamily: 'Poppins' }}>CoffeeWith.Dy</Typography>
         <Typography maxWidth="80vw" variant="h4" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontSize: '2rem', fontWeight: 300 }}>Which </span>
-          <strong style={{ fontSize: '2.5rem', fontWeight: 700, color: 'black' }}>
+          <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)", fontWeight: 300 }}>Which </span>
+          <strong style={{ fontSize: "clamp(1.5rem, 3.5vmin, 3.5rem)", fontWeight: 700, color: 'black' }}>
             Recipe
           </strong>
-          <span style={{ fontSize: '2rem', fontWeight: 300 }}> do you use?</span>
+          <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)", fontWeight: 300 }}> do you use?</span>
         </Typography>
         <Stack direction="row">
           {displayedCard.map((cardRecipe, index) => (
@@ -151,7 +151,7 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
                 <CardActionArea>
                   <CardMedia
                     component="img"
-                    height="150rem"
+                    height="160rem"
                     src={cardRecipe.image}
                     sx={{ objectFit: 'cover' }} />
                   <CardContent sx={{
@@ -161,13 +161,13 @@ const CardRecipeCarousel: React.FC<CardRecipeCarouselProps> = ({ onRecipeSelect,
                     width: '100%',
                     color: 'black'
                   }}>
-                    <Typography gutterBottom component="div" style={{ fontSize: '0.8rem', fontFamily: 'Poppins', fontWeight: 700 }}>
+                    <Typography gutterBottom component="div" style={{ fontSize: "clamp(0.8rem, 1.1rem, 2vmin)", fontFamily: 'Poppins', fontWeight: 700 }}>
                       {cardRecipe.recipeName}
                     </Typography>
-                    <Typography variant="overline" component="div" style={{ fontSize: '0.5rem', fontFamily: 'Poppins' }}>
+                    <Typography variant="overline" component="div" style={{ fontSize: "clamp(0.4rem, 0.8rem, 2vmin)", fontFamily: 'Poppins' }}>
                       by {cardRecipe.name}
                     </Typography>
-                    <Typography variant="body2" sx={{ fontSize: '0.6rem', fontWeight: 500, fontFamily: 'Poppins', opacity:1}}>
+                    <Typography variant="body2" sx={{ fontSize: "clamp(0.6rem, 0.8rem, 2vmin)", fontWeight: 500, fontFamily: 'Poppins', opacity:1}}>
                       {cardRecipe.description}
                     </Typography>
                   </CardContent>

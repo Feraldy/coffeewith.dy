@@ -8,7 +8,7 @@ import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 import FullRecipe from "@/components/fullRecipe";
 import WaterRatio from "@/components/waterRatio";
 import { CardRecipe, Dripper } from "@/utils/types";
-import { Typography } from "@mui/material";
+import { Stack, styled, Typography } from "@mui/material";
 
 function Home() {
   const [selectedDripper, setSelectedDripper] = useState<Dripper | null>(null);
@@ -107,6 +107,12 @@ function Home() {
       gsap.to(window, { duration: 2, scrollTo: fullRecipeRef.current });
     }
   }
+  
+  const Container = styled(Stack)({
+    backgroundColor: '#D9D9D9',
+    height: '30vh', 
+    justifyContent: 'center',
+  });
 
   return (
     <div>
@@ -118,19 +124,23 @@ function Home() {
           onRecipeConfirm={handleRecipeConfirm}
         />
       </div>
+      <Container></Container>
       {showCarousel && ( // Conditionally render based on state
         <div ref={carouselRef}>
           <CoffeeDripperCarousel onDripperSelect={handleDripperSelect} />
+          <Container></Container>
         </div>
       )}
       {showScale && ( // Conditionally render based on state
         <div ref={scaleRef}>
           <CoffeeScale onScaleChange={handleScaleChange} onScaleConfirm={handleScaleConfirm} coffeeWeight={coffeeWeight}/>
+          <Container></Container>
         </div>
       )}
       {showWaterRatio && ( // Conditionally render based on state
         <div ref={waterRatioRef}>
           <WaterRatio onWaterRatioChange={handleWaterRatioChange} onWaterRatioConfirm={handleWaterRatioConfirm} coffeeWeight={coffeeWeight} water={water} ratio={ratio}/>
+          <Container></Container>
         </div>
       )}
       {showFullRecipe && selectedRecipe && selectedDripper &&( // Conditionally render based on state
@@ -142,8 +152,11 @@ function Home() {
             ratio={ratio}
             water={water}
           />
+          <Container></Container> 
+          <Container></Container> 
         </div>
-      )}    
+      )}   
+      
     </div>
   );
 }

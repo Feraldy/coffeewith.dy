@@ -2,7 +2,7 @@ import React, { useEffect, useRef }  from 'react';
 import { Box, FormControl,  Input, Typography } from '@mui/material';
 import { Stack, styled } from '@mui/system';
 
-const Container = styled(Stack)({
+  const Container = styled(Stack)({
     backgroundColor: '#D9D9D9',
     height: '100vh', 
     justifyContent: 'center',
@@ -57,11 +57,11 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
     <Container spacing={2} alignItems="center" ref={scaleRef}>
       <Stack spacing={2} alignItems="center" height="100vh" justifyContent="center" gap="1rem">
         <Typography variant="h4" maxWidth="80vw" style={{ textAlign: 'center', color: 'black', fontFamily: 'Poppins' }}>
-          <span style={{ fontSize: '2rem',fontWeight: 300 }}>How much </span> 
-          <strong style={{ fontSize: '2.3rem', fontWeight: 700, color: 'black' }}>
+          <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)",fontWeight: 300 }}>How much </span> 
+          <strong style={{ fontSize: "clamp(1.5rem, 3.5vmin, 3.5rem)", fontWeight: 700, color: 'black' }}>
             Coffee
           </strong> 
-          <span style={{ fontSize: '2rem', fontWeight: 300 }}> do you use?</span>
+          <span style={{ fontSize: "clamp(1rem, 3vmin, 3rem)", fontWeight: 300 }}> do you use?</span>
         </Typography>
         <Stack position="relative" sx={{'&:hover': {
                 cursor: 'pointer',
@@ -108,13 +108,16 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
       </Stack>
         <Stack direction="row" alignItems="center" justifyContent='center' spacing={2}> 
           <Typography 
+            paddingLeft="1.5rem"
+            paddingRight="1.5rem"
+            fontSize="1.3rem"
             style={{ textAlign: 'center', color: 'black', cursor: 'pointer' }} 
             onClick={handleDecrement}
             role="button"
           >
             -
           </Typography>
-          <FormControl variant="standard" sx={{ m: 1, mt: 3, width: '25ch' }}>
+          <FormControl variant="standard" sx={{ m: 1, mt: 3, width: '8rem' }}>
           <Input
             id="standard-adornment-weight"
             aria-describedby="standard-weight-helper-text"
@@ -127,6 +130,9 @@ const CoffeeScale: React.FC<CoffeeScaleProps> = ({ onScaleChange, onScaleConfirm
           />
         </FormControl>
           <Typography 
+            paddingLeft="1.5rem"
+            paddingRight="1.5rem"
+            fontSize="1.3rem"
             style={{ textAlign: 'center', color: 'black', cursor: 'pointer' }} 
             onClick={handleIncrement}
             role="button"
