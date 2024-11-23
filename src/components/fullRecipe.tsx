@@ -129,20 +129,20 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
       </Box>
       <Box
         position= "absolute"
-        maxWidth= "14rem"
+        maxWidth= "clamp(13rem, 15rem, 50vmin)"
         component="img"
         src="scale.png"
-        style={{ top: "10rem", left: "-12rem", rotate: "-25deg" }}
+        style={{ top: "clamp(0rem, 9rem, 5vmin)", left: "clamp(-13rem, -15rem, -12vmax)", rotate: "-25deg" }}
         alt="Scale"
       />
       <Box
         position= "absolute"
-        maxWidth= "15rem"
+        maxWidth= "clamp(10rem, 15rem, 50vmin)"
         component="img"
         src={selectedRecipe?.image}
         style={{
-          top: "-3rem",
-          right: "-10rem",
+          top: "clamp(-3rem, -4rem, -5vmax)",
+          right: "clamp(-10rem, -9rem, -10vmax)",
           borderRadius: "20px",
           rotate: "25deg",
         }}
@@ -150,10 +150,10 @@ const FullRecipe: React.FC<FullRecipeProps> = ({
       />
       <Box
         position= "absolute"
-        maxWidth= "20rem"
+        maxWidth= "clamp(15rem, 25rem, 20vw)"
         component="img"
         src={selectedDripper?.image}
-        style={{ top: "25rem", right: "-10rem", rotate: "45deg" }}
+        style={{ top: "clamp(20rem, 30rem, 25vmax)", right: "clamp(-10rem, -9rem, -10vmax)", rotate: "45deg" }}
         alt="V60 Filter"
       />
       </Stack>
